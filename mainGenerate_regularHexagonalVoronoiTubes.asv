@@ -7,7 +7,7 @@ addpath(genpath('src'))
 sideHexagon = 10;nRowsSeeds=5;nColumnsSeeds=4;angleRot=0;
 
 %points per unit of area (density of point cloud)
-ppaDefault=10;
+ppaDefault=1;
 spacedQueryEdges=sideHexagon/200; %density of cell edges
 numberOfSrSpaces = 100;%200
 %basal surface ratio. 8/3 is just the theoretica SR when hexagonal lattice
@@ -41,7 +41,7 @@ cellsToStudy =intersect(cellsToStudyX,cellsToStudyY);
 coordCellsVoronoi = cell(max(cellsToStudy),1);
 coordCellsFrusta = cell(max(cellsToStudy),1);
 
-for SR = 1:(srFinal-1)/numberOfSrSpaces:srFinal
+for SR = 1:(srFinal-1)/numberOfSrSpaces:
 
     triSeedsPerSR = [triSeeds(:,1)*SR,triSeeds(:,2)];
 
@@ -58,11 +58,11 @@ for SR = 1:(srFinal-1)/numberOfSrSpaces:srFinal
     tri_Voronoi = DT.ConnectivityList;
     verticesTRI_Voronoi = DT.circumcenter;  
     
-%     if SR==1
-%         tri_frusta = tri_Voronoi;
-%         verticesTRI_frustaInit = verticesTRI_Voronoi;
-%     end
-%     verticesTRI_frusta(:,1)=verticesTRI_frustaInit(:,1)*SR;
+    if SR==1
+        tri_frusta = tri_Voronoi;
+        verticesTRI_frustaInit = verticesTRI_Voronoi;
+    end
+    verticesTRI_frusta(:,1)=verticesTRI_frustaInit(:,1)*SR;
     
     if SR==1 || SR==srFinal
         ppa=ppaDefault*100;
